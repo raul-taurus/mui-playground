@@ -31,7 +31,7 @@ function Connector({ branchCount }: ConnectorProps) {
   }, [branchCount, windowsResize]);
 
   return <svg style={{ width: '100%', height: '100px' }} xmlns="http://www.w3.org/2000/svg">
-    <path ref={pathRef} stroke="#0dc" fill="none" strokeWidth={3} />
+    <path ref={pathRef} stroke="#0dc" fill="none" strokeWidth={2} />
   </svg>
 
 }

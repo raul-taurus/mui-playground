@@ -19,7 +19,8 @@ export namespace SvgPathCommandProp {
   export type a = { rx: number, ry: number, angle: number, large_arc_flag: number, sweep_flag: number, dx: number, dy: number }
 }
 
-const p = (x: number, y: number) => `${x},${y}`;
+// const p = (x: number, y: number) => `${x},${y}`;
+const p = (x: number, y: number) => `${Math.round(x * 100) / 100},${Math.round(y * 100) / 100}`;
 const join = <T>(arr: T[], format: (a: T) => string) => arr.map(format).join(' ')
 
 const SvgPathCommandTemplate = {
