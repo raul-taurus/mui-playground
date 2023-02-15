@@ -1,3 +1,7 @@
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d#path_commands
+ */
+
 export namespace SvgPathCommandProp {
   export type M = [x: number, y: number]
   export type m = [dx: number, dy: number]
