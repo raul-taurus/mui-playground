@@ -76,3 +76,49 @@ export function buildTree(width: number, height: number, count: number, radius: 
   return path.toString();
 }
 
+export function buildTree2(rect: DOMRect, children: (HTMLDivElement | null)[], radius: number = 20) {
+  const { width, height } = rect;
+  const halfW = width / 2;
+  const halfH = height / 2;
+  const path = new SvgPath();
+  path.M([halfW, 0]);
+  path.l([0, halfH - radius]);
+
+  for (const c of children) {
+    const cRect = c!.getBoundingClientRect();
+    const targetPoint = {
+      x: cRect.x + cRect.width / 2 - rect.x,
+      y: cRect.y,
+    }
+
+    path.M([halfW, halfH - radius]);
+
+    const nearMid = targetPoint.x >= halfW - radius && targetPoint.x <= halfW + radius
+    if (nearMid) {
+      path.L([targetPoint.x, height])
+      continue;
+    }
+
+    const isLeft = targetPoint.x <= halfW;
+    path.a({
+      rx: radius, ry: radius, angle: 0,
+      large_arc_flag: 0,
+      sweep_flag: isLeft ? 1 : 0,
+      dx: isLeft ? -radius : radius,
+      dy: radius
+    })
+
+    path.L([targetPoint.x + (isLeft ? radius : -radius), halfH])
+    path.a({
+      rx: radius, ry: radius, angle: 0,
+      large_arc_flag: 0,
+      sweep_flag: isLeft ? 0 : 1,
+      dx: isLeft ? -radius : radius,
+      dy: radius
+    })
+    path.L([targetPoint.x, height])
+  }
+
+  return path.toString();
+}
+
