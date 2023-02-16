@@ -95,6 +95,10 @@ export function buildTree2(rect: DOMRect, children: (HTMLDivElement | null)[], r
 
     const nearMid = targetPoint.x >= halfW - radius && targetPoint.x <= halfW + radius
     if (nearMid) {
+      const offsetX = cRect.x - rect.x;
+      if (offsetX < targetPoint.x - radius || targetPoint.x + radius < offsetX + cRect.width) {
+        targetPoint.x = halfW;
+      }
       path.L([targetPoint.x, height])
       continue;
     }
